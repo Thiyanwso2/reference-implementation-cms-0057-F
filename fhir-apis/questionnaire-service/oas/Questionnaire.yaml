@@ -1,51 +1,14 @@
 openapi: 3.0.1
 info:
-  title: QuestionnaireAPI
+  title: FHIR R4 Questionnaire API
   description: API for managing FHIR R4 Questionnaire resources.
-  license:
-    name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
 servers:
-  - url: https://localhost:8243/r4/Questionnaire
-tags:
-  - name: international
-  - name: Patient
-  - name: 4.0.1
+  - url: http://localhost:9090/fhir/r4
 paths:
-  /fhir/r4/Questionnaire:
-    get:
-      tags:
-        - GET
-        - Questionnaires
-      summary: Search for Questionnaires
-      responses:
-        "200":
-          description: A bundle of matching Questionnaires
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Bundle"
-    post:
-      summary: Create a new Questionnaire
-      tags:
-        - POST
-        - Questionnaire
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Questionnaire"
-      responses:
-        "201":
-          description: Successfully created Questionnaire
   /fhir/r4/Questionnaire/{id}:
     get:
       summary: Retrieve a Questionnaire by ID
-      tags:
-        - GET
-        - Questionnaire
       parameters:
         - name: id
           in: path
@@ -89,6 +52,32 @@ paths:
       responses:
         "501":
           description: Not implemented
+  /fhir/r4/Questionnaire:
+    get:
+      summary: Search for Questionnaires
+      parameters:
+        - name: searchParams
+          in: query
+          schema:
+            type: object
+      responses:
+        "200":
+          description: A bundle of matching Questionnaires
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bundle"
+    post:
+      summary: Create a new Questionnaire
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Questionnaire"
+      responses:
+        "201":
+          description: Successfully created Questionnaire
   /fhir/r4/Questionnaire/{id}/_history:
     get:
       summary: Retrieve the update history of a Questionnaire
