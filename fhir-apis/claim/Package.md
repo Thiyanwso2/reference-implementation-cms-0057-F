@@ -14,7 +14,7 @@ This template provides a boilerplate code for rapid implementation of FHIR APIs 
 
 - ballerinax/health.fhir.r4
 - ballerinax/health.fhirr4
-- ballerinax/health.fhir.r4
+- ballerinax/health.fhir.r4.davincipas
 
 This template includes a Ballerina service for Claim FHIR resource with following FHIR interactions.
 - READ
@@ -31,7 +31,7 @@ This template includes a Ballerina service for Claim FHIR resource with followin
 
 Pull the template from central
 
-    ` bal new -t healthcare/health.fhir.r4.claim ClaimAPI `
+    ` bal new -t healthcare/health.fhir.r4.davincipas.claim ClaimAPI `
 
 ## Run the template
 
