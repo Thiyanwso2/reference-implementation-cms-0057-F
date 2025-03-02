@@ -33,7 +33,7 @@ service / on new fhirr4:Listener(9090, apiConfig) {
 
     // Read the current state of single resource based on its id.
     isolated resource function get fhir/r4/QuestionnaireResponse/[string id](r4:FHIRContext fhirContext) returns QuestionnaireResponse|r4:OperationOutcome|r4:FHIRError {
-        return r4:createFHIRError("Not implemented", r4:ERROR, r4:INFORMATIONAL, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
+        return getById(id);
     }
 
     // Read the state of a specific version of a resource based on its id.
@@ -48,7 +48,7 @@ service / on new fhirr4:Listener(9090, apiConfig) {
 
     // Create a new resource.
     isolated resource function post fhir/r4/QuestionnaireResponse(r4:FHIRContext fhirContext, QuestionnaireResponse procedure) returns QuestionnaireResponse|r4:OperationOutcome|r4:FHIRError {
-        return r4:createFHIRError("Not implemented", r4:ERROR, r4:INFORMATIONAL, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
+        return create(procedure);
     }
 
     // Update the current state of a resource completely.
