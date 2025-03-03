@@ -118,10 +118,12 @@ function init() returns error? {
             "resourceType": "Claim",
             "id": "12344",
             "identifier":
+                [
                 {
-                "system": "http://hospital.org/claims",
-                "value": "PA-20250302-001"
-            }
+                    "system": "http://hospital.org/claims",
+                    "value": "PA-20250302-001"
+                }
+            ]
             ,
             "status": "active",
             "type": {
