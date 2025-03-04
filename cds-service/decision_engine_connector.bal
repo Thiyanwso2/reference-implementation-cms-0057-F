@@ -26,7 +26,7 @@ isolated function connectDecisionSystemForPrescirbeMedication(cds:CdsRequest cds
                 "indicator": "warning",
                 "detail": "This medication (Aimovig 70 mg) requires prior authorization from XYZ Health Insurance. Please complete the required documentation.",
                 "source": {
-                    "label": "XYZ Health Insurance ePA Service",
+                    "label": "UnitedCare Health Insurance ePA Service",
                     "url": "https://xyzhealth.com/prior-auth"
                 },
                 "suggestions": [
@@ -51,10 +51,10 @@ isolated function connectDecisionSystemForPrescirbeMedication(cds:CdsRequest cds
                                         ]
                                     },
                                     "for": {
-                                        "reference": "Patient/56789"
+                                        "reference": "Patient/101"
                                     },
                                     "owner": {
-                                        "reference": "Organization/XYZHealthInsurance"
+                                        "reference": "Organization/50"
                                     }
                                 }
                             }
@@ -69,7 +69,7 @@ isolated function connectDecisionSystemForPrescirbeMedication(cds:CdsRequest cds
                     },
                     {
                         "label": "Launch SMART App for DTR",
-                        "url": "https://xyzhealth.com/smart-dtr-launch",
+                        "url": "http://localhost:5173/dashboard/drug-order-v2/prior-auth?questionnaireId=4",
                         "type": "smart"
                     }
                 ]
