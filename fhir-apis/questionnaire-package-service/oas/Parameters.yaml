@@ -28,6 +28,7 @@ paths:
               $ref: "#/components/schemas/Parameters"
       responses:
         "200":
+          description: "Questionnaire Package"
 components:
   schemas:
     Resource:
