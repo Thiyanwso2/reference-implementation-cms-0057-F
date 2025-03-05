@@ -260,6 +260,20 @@ paths:
       security:
         - default: []
       x-auth-type: Application & Application User
+    post:
+      summary: Create a new MedicationRequest
+      tags:
+        - POST
+        - MedicationRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicationRequest"
+      responses:
+        "201":
+          description: Successfully created MedicationRequest
   /fhir/r4/MedicationRequest/{id}:
     get:
       tags:
@@ -283,20 +297,6 @@ paths:
       security:
         - default: []
       x-auth-type: Application & Application User
-    post:
-      summary: Create a new MedicationRequest
-      tags:
-        - POST
-        - MedicationRequest
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MedicationRequest"
-      responses:
-        "201":
-          description: Successfully created MedicationRequest
     put:
       tags:
         - PUT
