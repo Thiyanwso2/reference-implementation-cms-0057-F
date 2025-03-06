@@ -26,7 +26,7 @@ isolated davincipas:PASClaim[] claims = [];
 isolated davincipas:PASClaimResponse[] claimResponses = [];
 isolated int createOperationNextId = 12344;
 
-public isolated function submit(international401:Parameters payload) returns r4:FHIRError|davincipas:PASClaimResponse|r4:FHIRParseError|error {
+public isolated function submit(international401:Parameters payload) returns r4:FHIRError|international401:Parameters|error {
     international401:Parameters|error 'parameters = parser:parseWithValidation(payload.toJson(), international401:Parameters).ensureType();
 
     if parameters is error {
@@ -66,7 +66,16 @@ public isolated function submit(international401:Parameters payload) returns r4:
                                 claimResponseClone.insurer = claim.clone().insurer;
                                 claimResponseClone.created = claim.clone().created;
                                 claimResponses.push(claimResponseClone);
-                                return claimResponseClone.clone();
+
+                                international401:ParametersParameter p = {
+                                    name: "return",
+                                    'resource: claimResponseClone.clone()
+                                };
+
+                                international401:Parameters response = {
+                                    'parameter: [p]
+                                };
+                                return response.clone();
                             }
 
                         }

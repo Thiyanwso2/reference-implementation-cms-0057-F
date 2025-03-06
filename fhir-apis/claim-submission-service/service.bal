@@ -18,7 +18,6 @@
 import ballerina/http;
 import ballerinax/health.fhir.r4;
 import ballerinax/health.fhirr4;
-import ballerinax/health.fhir.r4.davincipas;
 import ballerinax/health.fhir.r4.international401;
 
 # Generic type to wrap all implemented profiles.
@@ -34,7 +33,7 @@ service / on new fhirr4:Listener(9090, apiConfig) {
 
     // Create a new resource.
     isolated resource function post fhir/r4/Claim/submit(r4:FHIRContext fhirContext, Parameters parameters) returns error|http:Response {
-        davincipas:PASClaimResponse submitResult = check submit(parameters);
+        international401:Parameters submitResult = check submit(parameters);
         http:Response response = new;
         response.setJsonPayload(submitResult.toJson());
         return response;
