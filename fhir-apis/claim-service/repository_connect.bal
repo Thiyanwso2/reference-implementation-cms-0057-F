@@ -25,7 +25,7 @@ import ballerinax/health.fhir.r4.parser;
 isolated davincipas:PASClaim[] claims = [];
 isolated int createOperationNextId = 12344;
 
-public isolated function create(davincipas:PASClaim payload) returns r4:FHIRError|davincipas:PASClaim {
+public isolated function create(davincipas:PASClaim payload) returns r4:FHIRError|davincipas:PASClaimResponse|r4:FHIRParseError|error {
     davincipas:PASClaim|error claim = parser:parseWithValidation(payload.toJson(), davincipas:PASClaim).ensureType();
 
     if claim is error {
@@ -39,7 +39,13 @@ public isolated function create(davincipas:PASClaim payload) returns r4:FHIRErro
             claims.push(claim.clone());
         }
 
-        return claim;
+        lock {
+            davincipas:PASClaimResponse claimResponse = check parser:parse(claimResponseJson, davincipas:PASClaimResponse).ensureType();
+            claimResponse.patient = claim.clone().patient;
+            claimResponse.insurer = claim.clone().insurer;
+            claimResponse.created = claim.clone().created;
+            return claimResponse.clone();
+        }
     }
 }
 
@@ -218,3 +224,61 @@ function init() returns error? {
     }
 
 }
+
+isolated json claimResponseJson = {
+    "resourceType": "ClaimResponse",
+    "id": "12344",
+    "status": "active",
+    "type": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+                "code": "professional",
+                "display": "Professional"
+            }
+        ]
+    },
+    "use": "preauthorization",
+    "patient": {
+        "reference": "Patient/101"
+    },
+    "created": "2025-03-02",
+    "insurer": {
+        "reference": "Organization/insurance-org"
+    },
+    "request": {
+        "reference": "Claim/12344"
+    },
+    "outcome": "complete",
+    "disposition": "Prior authorization approved for Aimovig 70 mg Injection.",
+    "preAuthRef": "PA-20250302-001",
+    "preAuthPeriod": {
+        "start": "2025-03-02",
+        "end": "2025-06-02"
+    },
+    "payment": {
+        "type": {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/payment-type",
+                    "code": "complete",
+                    "display": "Payment complete"
+                }
+            ]
+        },
+        "adjustmentReason": {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/claim-adjustment-reason",
+                    "code": "45",
+                    "display": "Charge exceeds fee schedule/maximum allowable or contracted/legislated fee arrangement"
+                }
+            ]
+        },
+        "amount": {
+            "value": 600.00,
+            "currency": "USD"
+        },
+        "date": "2025-03-03"
+    }
+};
