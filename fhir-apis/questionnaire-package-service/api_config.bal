@@ -20,13 +20,28 @@ import ballerinax/health.fhir.r4;
 final r4:ResourceAPIConfig apiConfig = {
     resourceType: "Parameters",
     profiles: [
-            "http://hl7.org/fhir/StructureDefinition/Parameters"        
+        "http://hl7.org/fhir/StructureDefinition/Parameters"
     ],
     defaultProfile: (),
     searchParameters: [
-        ],
+    ],
     operations: [
-    
+        {
+            name: "questionnaire-package",
+            active: true,
+            parameters: [
+                {
+                    name: "coverage",
+                    active: true,
+                    min: 1
+                },
+                {
+                    name: "order",
+                    active: true,
+                    min: 1
+                }
+            ]
+        }
     ],
     serverConfig: (),
     authzConfig: ()
