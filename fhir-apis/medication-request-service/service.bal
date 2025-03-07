@@ -48,8 +48,11 @@ service / on new fhirr4:Listener(9090, apiConfig) {
     }
 
     // Create a new resource.
-    isolated resource function post fhir/r4/MedicationRequest(r4:FHIRContext fhirContext, MedicationRequest medicationRequest) returns MedicationRequest|r4:OperationOutcome|r4:FHIRError {
-        return create(medicationRequest);
+    isolated resource function post fhir/r4/MedicationRequest(r4:FHIRContext fhirContext, MedicationRequest medicationRequest) returns error|http:Response {
+        uscore501:USCoreMedicationRequestProfile createResult = check create(medicationRequest);
+        http:Response response = new;
+        response.setJsonPayload(createResult.toJson());
+        return response;
     }
 
     // Update the current state of a resource completely.
