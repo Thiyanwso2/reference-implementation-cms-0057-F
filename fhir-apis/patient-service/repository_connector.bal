@@ -4,24 +4,6 @@ import ballerinax/health.fhir.r4;
 import ballerinax/health.fhir.r4.parser;
 import ballerinax/health.fhir.r4.uscore501;
 
-// http:OAuth2ClientCredentialsGrantConfig ehrSystemAuthConfig = {
-//     tokenUrl: "https://login.microsoftonline.com/da76d684-740f-4d94-8717-9d5fb21dd1f9/oauth2/token",
-//     clientId: "",
-//     clientSecret: "",
-//     scopes: ["system/Patient.read, system/Patient.write"],
-//     optionalParams: {
-//         "resource": "https://ohfhirrepositorypoc-ohfhirrepositorypoc.fhir.azurehealthcareapis.com"
-//     }
-// };
-
-// fhir:FHIRConnectorConfig ehrSystemConfig = {
-//     baseURL: "https://ohfhirrepositorypoc-ohfhirrepositorypoc.fhir.azurehealthcareapis.com/",
-//     mimeType: fhir:FHIR_JSON,
-//     authConfig: ehrSystemAuthConfig
-// };
-
-// isolated fhir:FHIRConnector fhirConnectorObj = check new (ehrSystemConfig);
-
 isolated uscore501:USCorePatientProfile[] patients = [];
 isolated int createOperationNextId = 102;
 
@@ -54,20 +36,6 @@ public isolated function getById(string id) returns r4:FHIRError|uscore501:USCor
         }
     }
     return r4:createFHIRError(string `Cannot find a Patient resource with id: ${id}`, r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_FOUND);
-}
-
-public isolated function update(json payload) returns r4:FHIRError|fhir:FHIRResponse {
-    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
-
-}
-
-public isolated function patchResource(string 'resource, string id, json payload) returns r4:FHIRError|fhir:FHIRResponse {
-    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
-}
-
-public isolated function delete(string 'resource, string id) returns r4:FHIRError|fhir:FHIRResponse {
-    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
-
 }
 
 public isolated function search(string 'resource, map<string[]>? searchParameters = ()) returns r4:FHIRError|r4:Bundle {
@@ -110,6 +78,20 @@ public isolated function search(string 'resource, map<string[]>? searchParameter
     }
 
     return bundle;
+}
+
+public isolated function update(json payload) returns r4:FHIRError|fhir:FHIRResponse {
+    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
+
+}
+
+public isolated function patchResource(string 'resource, string id, json payload) returns r4:FHIRError|fhir:FHIRResponse {
+    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
+}
+
+public isolated function delete(string 'resource, string id) returns r4:FHIRError|fhir:FHIRResponse {
+    return r4:createFHIRError("Not implemented", r4:ERROR, r4:INVALID, httpStatusCode = http:STATUS_NOT_IMPLEMENTED);
+
 }
 
 function init() returns error? {
