@@ -4,24 +4,6 @@ import ballerinax/health.fhir.r4.davincipas;
 import ballerinax/health.fhir.r4.international401;
 import ballerinax/health.fhir.r4.parser;
 
-// http:OAuth2ClientCredentialsGrantConfig ehrSystemAuthConfig = {
-//     tokenUrl: "https://login.microsoftonline.com/da76d684-740f-4d94-8717-9d5fb21dd1f9/oauth2/token",
-//     clientId: "",
-//     clientSecret: "",
-//     scopes: ["system/Patient.read, system/Patient.write"],
-//     optionalParams: {
-//         "resource": "https://ohfhirrepositorypoc-ohfhirrepositorypoc.fhir.azurehealthcareapis.com"
-//     }
-// };
-
-// fhir:FHIRConnectorConfig ehrSystemConfig = {
-//     baseURL: "https://ohfhirrepositorypoc-ohfhirrepositorypoc.fhir.azurehealthcareapis.com/",
-//     mimeType: fhir:FHIR_JSON,
-//     authConfig: ehrSystemAuthConfig
-// };
-
-// isolated fhir:FHIRConnector fhirConnectorObj = check new (ehrSystemConfig);
-
 isolated davincipas:PASClaim[] claims = [];
 isolated davincipas:PASClaimResponse[] claimResponses = [];
 isolated int createOperationNextId = 12344;
